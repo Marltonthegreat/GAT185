@@ -21,11 +21,5 @@ public class Player : MonoBehaviour
         {
             audioSource.Play();
         }
-
-        GameObject go = GameObject.Find("Cube");
-        if (go)
-        {
-            go.GetComponent<Renderer>().material.color = Color.cyan;
-        }
     }
 }
