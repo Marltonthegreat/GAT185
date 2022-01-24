@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceWeapons : MonoBehaviour
+public class SpaceWeapon : MonoBehaviour
 {
     [SerializeField] GameObject projectilePrefab;
     [SerializeField] Transform spawnTransform;
@@ -13,15 +13,14 @@ public class SpaceWeapons : MonoBehaviour
     private void Update()
     {
         fireTimer -= Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") || (Input.GetButton("Fire1") && fireTimer <= 0))
-        {
-            fireTimer = fireRate;
-            Fire();
-        }
     }
 
     public void Fire()
     {
-        Instantiate(projectilePrefab, spawnTransform.position, spawnTransform.rotation);
+        if (fireTimer <= 0)
+        {
+            fireTimer = fireRate;
+            Instantiate(projectilePrefab, spawnTransform.position, spawnTransform.rotation);
+        }
     }
 }

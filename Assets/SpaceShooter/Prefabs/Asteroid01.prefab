@@ -76,6 +76,34 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1212796926661636, guid: 61041b38478b1174383f35214324c3d1, type: 3}
   m_PrefabInstance: {fileID: 2993029441064149614}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &-152567802764162722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2994101431483872874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 497ed61267ffec94e8bab3b84bcb49ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathPrefab: {fileID: 0}
+  destroyOnDeath: 1
+  maxHealth: 10
+--- !u!114 &7901675056553527864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2994101431483872874}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6f8a1ef6de7a6489b9e293fe31e671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  points: 10
 --- !u!114 &8289244303202111603
 MonoBehaviour:
   m_ObjectHideFlags: 0

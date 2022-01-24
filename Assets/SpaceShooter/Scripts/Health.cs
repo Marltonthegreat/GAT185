@@ -22,7 +22,10 @@ public class Health : MonoBehaviour
 
         if (health <= 0)
         {
-            GameManager.Instance.Score += 100;
+            if(TryGetComponent(out IDesructable desructable))
+            {
+                desructable.Destroyed();
+            }
 
             if (deathPrefab != null)
             {
