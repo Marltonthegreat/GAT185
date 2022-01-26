@@ -261,6 +261,35 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 496846, guid: 7111b43de008a9d4aade063a6b5c70ef, type: 3}
   m_PrefabInstance: {fileID: 5361200068690855739}
   m_PrefabAsset: {fileID: 0}
+--- !u!54 &4702915351719426918
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5361200068690721055}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 3
+--- !u!65 &8529962975678662900
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5361200068690721055}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 23, y: 5, z: 30}
+  m_Center: {x: 0, y: 0, z: 2}
 --- !u!114 &-6883780420236202168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,6 +305,19 @@ MonoBehaviour:
   projectilePrefab: {fileID: 2409355775496252091, guid: 616f6879cc0a25f44b1ce763306d7c11, type: 3}
   spawnTransform: {fileID: 8269058008258400051}
   fireRate: 0.4
+--- !u!114 &-3180199845728874063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5361200068690721055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d78ee8dddd09e248b7efd3ea65f0ced, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 100
 --- !u!114 &447968833683694416
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -289,3 +331,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
+--- !u!114 &702096017716177066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5361200068690721055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 497ed61267ffec94e8bab3b84bcb49ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathPrefab: {fileID: 3402636992451956235, guid: ec7d85ecb4e5911458bee9b236844a11, type: 3}
+  destroyOnDeath: 1
+  maxHealth: 100

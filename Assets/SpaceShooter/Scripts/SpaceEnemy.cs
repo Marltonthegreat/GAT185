@@ -19,10 +19,10 @@ public class SpaceEnemy : MonoBehaviour, IDesructable
     void Update()
     {
         timer -= Time.deltaTime;
-        if (timer <= 0)
+        if (timer <= 0 && spaceWeapon != null)
         {
             timer = Random.Range(minFireTime, maxFireTime);
-            spaceWeapon?.Fire();
+            spaceWeapon.Fire();
         }
     }
 

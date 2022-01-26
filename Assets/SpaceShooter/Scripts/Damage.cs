@@ -12,9 +12,9 @@ public class Damage : MonoBehaviour
         {
             health.Damage(damage);
         }
-        if (gameObject.TryGetComponent(out health) && other.gameObject.TryGetComponent(out Damage otherDamage))
+/*        if (gameObject.TryGetComponent(out health) && other.gameObject.TryGetComponent(out Damage otherDamage))
         {
             health.Damage(otherDamage.damage);
-        }
+        }*/
     }
 }

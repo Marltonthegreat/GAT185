@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class GameManager : Singleton<GameManager>
@@ -15,6 +16,10 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] Transform playerSpawn;
     [SerializeField] GameObject titleScreen;
     [SerializeField] TMP_Text scoreUI;
+    [SerializeField] TMP_Text livesUI;
+    [SerializeField] Slider healthBarUI;
+
+    public float playerHealth { set { healthBarUI.value = value; } }
 
     public delegate void GameEvent();
 
@@ -22,6 +27,7 @@ public class GameManager : Singleton<GameManager>
     public event GameEvent stopGameEvent;
 
     int score = 0;
+    int lives = 0;
     State state = State.TITLE;
 
     public int Score
@@ -33,13 +39,22 @@ public class GameManager : Singleton<GameManager>
             scoreUI.text = score.ToString();
         }
     }
-    public int Lives { get; set; }
-
-
+    public int Lives
+    {
+        get { return lives; }
+        set
+        {
+            lives = value;
+            livesUI.text = "Lives " + lives.ToString();
+        }
+    }
 
     public void OnStartGame()
     {
         state = State.GAME;
+        Score = 0;
+        Lives = 3;
+
         titleScreen.SetActive(false);
 
         Instantiate(playerPrefab, playerSpawn.position, playerSpawn.rotation);
@@ -52,5 +67,17 @@ public class GameManager : Singleton<GameManager>
         state = State.TITLE;
         titleScreen.SetActive(true);
         stopGameEvent();
+    }
+
+    public void OnPlayerDead()
+    {
+        if( Lives-- > 0)    
+        {
+            Instantiate(playerPrefab, playerSpawn.position, playerSpawn.rotation);
+        }
+        else
+        {
+            OnStartTitle();
+        }
     }
 }
