@@ -9,12 +9,18 @@ public class GameManager : Singleton<GameManager>
     enum State
     {
         TITLE,
-        GAME
+        PLAYER_START,
+        GAME,
+        PLAYER_DEAD,
+        GAME_OVER
     }
 
     [SerializeField] GameObject playerPrefab;
     [SerializeField] Transform playerSpawn;
+    [SerializeField] BoxSpawner boxSpawner;
+
     [SerializeField] GameObject titleScreen;
+    [SerializeField] GameObject gameOverScreen;
     [SerializeField] TMP_Text scoreUI;
     [SerializeField] TMP_Text livesUI;
     [SerializeField] Slider healthBarUI;
@@ -29,6 +35,9 @@ public class GameManager : Singleton<GameManager>
     int score = 0;
     int lives = 0;
     State state = State.TITLE;
+    float stateTimer;
+    float gameTimer = 0;
+    int resetTimerNum = 5;
 
     public int Score
     {
@@ -49,35 +58,92 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    private void Update()
+    {
+        stateTimer -= Time.deltaTime;
+
+        switch (state)
+        {
+            case State.TITLE:
+                break;
+            case State.PLAYER_START:
+                DestroyAllEnemies();
+                Instantiate(playerPrefab, playerSpawn.position, playerSpawn.rotation);
+                startGameEvent?.Invoke();
+
+                state = State.GAME;
+                break;
+            case State.GAME:
+                gameTimer += Time.deltaTime;
+                if (gameTimer >= resetTimerNum)
+                {
+                    gameTimer = 0;
+                    resetTimerNum += 2;
+                    boxSpawner.timeModifier -= 0.1f;
+                    boxSpawner.timeModifier = Mathf.Max(0.2f, boxSpawner.timeModifier);
+                }
+                break;
+            case State.PLAYER_DEAD:
+                if (stateTimer <= 0)
+                {
+                    state = State.PLAYER_START;
+                }
+                break;
+            case State.GAME_OVER:
+                if (stateTimer <= 0)
+                {
+                    state = State.TITLE;
+                    gameOverScreen.SetActive(false);
+                    titleScreen.SetActive(true);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
     public void OnStartGame()
     {
-        state = State.GAME;
+        state = State.PLAYER_START;
         Score = 0;
-        Lives = 3;
+        Lives = 2;
+        gameTimer = 0;
+        resetTimerNum = 5;
 
         titleScreen.SetActive(false);
-
-        Instantiate(playerPrefab, playerSpawn.position, playerSpawn.rotation);
-
-        startGameEvent?.Invoke();
     }
 
     public void OnStartTitle()
     {
         state = State.TITLE;
         titleScreen.SetActive(true);
-        stopGameEvent();
+        stopGameEvent?.Invoke();
     }
 
     public void OnPlayerDead()
     {
-        if( Lives-- > 0)    
+        if( --Lives > 0)    
         {
-            Instantiate(playerPrefab, playerSpawn.position, playerSpawn.rotation);
+            state = State.PLAYER_DEAD;
+            stateTimer = 3;
         }
         else
         {
-            OnStartTitle();
+            state = State.GAME_OVER;
+            stateTimer = 5;
+
+            gameOverScreen.SetActive(true);
+        }
+        stopGameEvent?.Invoke();
+    }
+
+    private void DestroyAllEnemies()
+    {
+        // destroy all enemies
+        SpaceEnemy[] spaceEnemies = FindObjectsOfType<SpaceEnemy>();
+        foreach (SpaceEnemy spaceEnemy in spaceEnemies)
+        {
+            Destroy(spaceEnemy.gameObject);
         }
     }
 }
