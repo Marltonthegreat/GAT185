@@ -14,10 +14,17 @@ public class RollerCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Quaternion qpitch = Quaternion.AngleAxis(pitch, Vector3.right);
-        Vector3 offset = qpitch * Vector3.back * distance;
+        yaw += Input.GetAxis("Mouse X") * sensitivity;
+        yaw %= 360;
 
-        transform.rotation = qpitch;
+        Quaternion qyaw = Quaternion.AngleAxis(yaw, Vector3.up);
+        Quaternion qpitch = Quaternion.AngleAxis(pitch, Vector3.right);
+        Quaternion rotation = qyaw * qpitch;
+
+
+        Vector3 offset = rotation * Vector3.back * distance;
+
+        transform.rotation = Quaternion.LookRotation(-offset);
         transform.position = target.position + offset;
     }
 }
