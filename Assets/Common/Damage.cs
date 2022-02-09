@@ -5,16 +5,25 @@ using UnityEngine;
 public class Damage : MonoBehaviour
 {
     [SerializeField] float damage;
+    [SerializeField] bool oneTime = true;
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!oneTime) return;
+
         if (other.gameObject.TryGetComponent(out Health health))
         {
             health.Damage(damage);
         }
-/*        if (gameObject.TryGetComponent(out health) && other.gameObject.TryGetComponent(out Damage otherDamage))
+    }
+    
+    private void OnTriggerStay(Collider other)
+    {
+        if (oneTime) return;
+
+        if (other.gameObject.TryGetComponent(out Health health))
         {
-            health.Damage(otherDamage.damage);
-        }*/
+            health.Damage(damage * Time.deltaTime);
+        }
     }
 }
