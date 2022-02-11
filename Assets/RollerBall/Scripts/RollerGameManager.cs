@@ -18,10 +18,13 @@ public class RollerGameManager : Singleton<RollerGameManager>
     [SerializeField] GameObject playerPrefab;
     [SerializeField] Transform playerSpawn;
 
+    [SerializeField] GameObject mainCamera;
+
     [SerializeField] GameObject titleScreen;
     [SerializeField] GameObject gameOverScreen;
     [SerializeField] TMP_Text scoreUI;
     [SerializeField] TMP_Text livesUI;
+    [SerializeField] TMP_Text timeUI;
     [SerializeField] Slider healthBarUI;
 
     public float playerHealth { set { healthBarUI.value = value; } }
@@ -35,7 +38,7 @@ public class RollerGameManager : Singleton<RollerGameManager>
     int lives = 0;
     State state = State.TITLE;
     float stateTimer;
-    float gameTimer = 0;
+    float gameTime = 0;
     int resetTimerNum = 5;
 
     public int Score
@@ -47,6 +50,7 @@ public class RollerGameManager : Singleton<RollerGameManager>
             scoreUI.text = score.ToString();
         }
     }
+
     public int Lives
     {
         get { return lives; }
@@ -54,6 +58,16 @@ public class RollerGameManager : Singleton<RollerGameManager>
         {
             lives = value;
             livesUI.text = "Lives " + lives.ToString();
+        }
+    }
+    
+    public float GameTime
+    {
+        get { return gameTime; }
+        set
+        {
+            gameTime = value;
+            timeUI.text = "<mspace=mspace36>" + gameTime.ToString("0") + "</mspace>";
         }
     }
 
@@ -67,18 +81,23 @@ public class RollerGameManager : Singleton<RollerGameManager>
                 break;
             case State.PLAYER_START:
                 DestroyAllEnemies();
-                //Instantiate(playerPrefab, playerSpawn.position, playerSpawn.rotation);
+                mainCamera.SetActive(false);
+                Instantiate(playerPrefab, playerSpawn.position, playerSpawn.rotation);
+
                 startGameEvent?.Invoke();
 
                 state = State.GAME;
                 break;
             case State.GAME:
-                gameTimer += Time.deltaTime;
-                if (gameTimer >= resetTimerNum)
+                GameTime -= Time.deltaTime;
+                
+                if (GameTime <= 0)
                 {
-                    gameTimer = 0;
-                    resetTimerNum += 2;
+                    GameTime = 0;
+                    state = State.GAME_OVER;
+                    stateTimer = 5;
                 }
+
                 break;
             case State.PLAYER_DEAD:
                 if (stateTimer <= 0)
@@ -104,7 +123,7 @@ public class RollerGameManager : Singleton<RollerGameManager>
         state = State.PLAYER_START;
         Score = 0;
         Lives = 2;
-        gameTimer = 0;
+        GameTime = 60;
         resetTimerNum = 5;
 
         titleScreen.SetActive(false);
@@ -119,6 +138,8 @@ public class RollerGameManager : Singleton<RollerGameManager>
 
     public void OnPlayerDead()
     {
+        mainCamera.SetActive(true);
+
         if( --Lives > 0)    
         {
             state = State.PLAYER_DEAD;
