@@ -28,7 +28,7 @@ public class CharacterPlayer : MonoBehaviour
 
         if (controller.velocity.magnitude > 0) transform.forward = controller.velocity;
 
-        if (controller.isGrounded && Input.GetKeyDown("Space")) velocity.y += jumpForce;
+        if (controller.isGrounded && Input.GetKeyDown(KeyCode.Space)) velocity.y += jumpForce;
 
         velocity += Physics.gravity * Time.deltaTime;
 
