@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(Health))]
-public class RollerPlayer : MonoBehaviour, IDesructable
+public class RollerPlayer : MonoBehaviour, IDestructable
 {
     [SerializeField] float maxForce = 5;
     [SerializeField] float jumpForce = 5;
@@ -17,7 +17,8 @@ public class RollerPlayer : MonoBehaviour, IDesructable
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();   
+        rb = GetComponent<Rigidbody>();
+        GetComponent<Health>().deathSound = GameObject.Find("PlayerDeath").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame

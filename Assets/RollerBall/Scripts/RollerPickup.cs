@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RollerPickup : MonoBehaviour
+[RequireComponent(typeof(Health))]
+public abstract class RollerPickup : MonoBehaviour, IDestructable
 {
     public float amplitude = 1;
     public float rate = 1;
@@ -29,14 +30,5 @@ public class RollerPickup : MonoBehaviour
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            if (TryGetComponent(out IDesructable desructable))
-            {
-                desructable.Destroyed();
-            }
-        }
-    }
+    public abstract void Destroyed();
 }

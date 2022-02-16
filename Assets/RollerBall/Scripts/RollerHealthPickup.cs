@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RollerHealthPickup : RollerPickup, IDesructable
+public class RollerHealthPickup : RollerPickup, IDestructable
 {
     [SerializeField] int healAmount;
 
-    public void Destroyed()
+    public override void Destroyed()
     {
         GameObject go = GameObject.FindGameObjectWithTag("Player");
 

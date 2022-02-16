@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpaceEnemy : MonoBehaviour, IDesructable
+public class SpaceEnemy : MonoBehaviour, IDestructable
 {
     [SerializeField] SpaceWeapon spaceWeapon;
     [SerializeField] float minFireTime;

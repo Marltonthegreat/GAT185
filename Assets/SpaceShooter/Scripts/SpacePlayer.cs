@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpacePlayer : MonoBehaviour, IDesructable
+public class SpacePlayer : MonoBehaviour, IDestructable
 {
     [Range(0, 100)] [Tooltip("Speed of the player ship")] public float speed = 40;
 

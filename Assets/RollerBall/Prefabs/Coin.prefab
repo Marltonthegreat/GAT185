@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2712002459411136278}
   m_Layer: 0
   m_Name: Coin
-  m_TagString: Untagged
+  m_TagString: Coin
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,6 +78,7 @@ MonoBehaviour:
   deathPrefab: {fileID: 0}
   destroyOnDeath: 1
   maxHealth: 0
+  destroyRoot: 0
 --- !u!1001 &2936765364240357956
 PrefabInstance:
   m_ObjectHideFlags: 0

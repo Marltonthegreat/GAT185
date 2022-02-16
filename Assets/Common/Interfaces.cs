@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDesructable
+public interface IDestructable
 {
     public void Destroyed();
 }

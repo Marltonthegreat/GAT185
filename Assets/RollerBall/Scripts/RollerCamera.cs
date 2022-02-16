@@ -17,6 +17,9 @@ public class RollerCamera : MonoBehaviour
         yaw += Input.GetAxis("Mouse X") * sensitivity;
         yaw %= 360;
 
+        pitch += -Input.GetAxis("Mouse Y") * sensitivity * .75f;
+        pitch = Mathf.Clamp(pitch, -89.99f, 89.99f);
+
         Quaternion qyaw = Quaternion.AngleAxis(yaw, Vector3.up);
         Quaternion qpitch = Quaternion.AngleAxis(pitch, Vector3.right);
         Quaternion rotation = qyaw * qpitch;

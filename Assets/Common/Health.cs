@@ -5,6 +5,7 @@ using UnityEngine;
 public class Health : MonoBehaviour
 {
     [SerializeField] GameObject deathPrefab;
+    [SerializeField] public AudioSource deathSound;
     [SerializeField] bool destroyOnDeath = true;
     [SerializeField] float maxHealth = 100;
     [SerializeField] bool destroyRoot = false;
@@ -23,15 +24,21 @@ public class Health : MonoBehaviour
 
         if (health <= 0)
         {
-            if(TryGetComponent(out IDesructable desructable))
+            if(TryGetComponent(out IDestructable destructable))
             {
-                desructable.Destroyed();
+                destructable.Destroyed();
             }
 
             if (deathPrefab != null)
             {
                 Instantiate(deathPrefab, transform.position, transform.rotation);
             }
+
+            if (deathSound != null)
+            {
+                deathSound.Play();
+            }
+
             if (destroyOnDeath)
             {
                 if (destroyRoot) Destroy(gameObject.transform.root.gameObject);
