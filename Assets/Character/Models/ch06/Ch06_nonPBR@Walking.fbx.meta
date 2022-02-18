@@ -50,7 +50,7 @@ ModelImporter:
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
       keepOriginalPositionY: 1
       keepOriginalPositionXZ: 0
@@ -58,7 +58,35 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events: []
+      events:
+      - time: 0.1454979
+        functionName: LeftFootSpawn
+        data: 
+        objectReferenceParameter: {fileID: 7157919952118262084, guid: 4d385bdcb162bc940bc82c66072d6cc0, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.33870006
+        functionName: RightFootSpawn
+        data: 
+        objectReferenceParameter: {fileID: 7157919952118262084, guid: 4d385bdcb162bc940bc82c66072d6cc0, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.5641026
+        functionName: LeftFootSpawn
+        data: 
+        objectReferenceParameter: {fileID: 7157919952118262084, guid: 4d385bdcb162bc940bc82c66072d6cc0, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.8567427
+        functionName: RightFootSpawn
+        data: 
+        objectReferenceParameter: {fileID: 7157919952118262084, guid: 4d385bdcb162bc940bc82c66072d6cc0, type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
