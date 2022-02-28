@@ -9,9 +9,9 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField] AudioSource musicAudioSource;
     [SerializeField] AudioSource sfxAudioSource;
 
-    static readonly string MASTER_VOLUME = "Master_Volume";
-    static readonly string SFX_VOLUME = "SFX_Volume";
-    static readonly string MUSIC_VOLUME = "Music_Volume";
+    const string MASTER_VOLUME = "Master_Volume";
+    const string SFX_VOLUME = "SFX_Volume";
+    const string MUSIC_VOLUME = "Music_Volume";
 
     public float masterVolume
     {

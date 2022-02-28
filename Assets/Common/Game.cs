@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class Game : Singleton<Game>
@@ -19,6 +20,8 @@ public class Game : Singleton<Game>
 	[SerializeField] TMP_Text livesUI;
 	[SerializeField] TMP_Text timeUI;
 	[SerializeField] Slider healthUI;
+
+	[SerializeField] ScreenFade screenFade;
 
 	[SerializeField] AudioClip musicClip;
 
@@ -66,6 +69,8 @@ public class Game : Singleton<Game>
 		highScore++;
 		PlayerPrefs.SetInt("highscore", highScore);
 
+		print(highScore);
+
 		//PlayerPrefs.DeleteAll();
 		//PlayerPrefs.DeleteKey("highscore");
 
@@ -90,4 +95,16 @@ public class Game : Singleton<Game>
 				break;
 		}
 	}
+
+	public void OnLoadScene(string sceneName)
+	{
+		StartCoroutine(LoadScene(sceneName));
+	}
+
+	IEnumerator LoadScene(string sceneName)
+    {
+		screenFade.FadeOut();
+		yield return new WaitUntil(() => screenFade.isDone);
+		SceneManager.LoadScene(sceneName);
+    }
 }
