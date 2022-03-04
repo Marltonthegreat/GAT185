@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DestroyTimer : MonoBehaviour
 {
+    [SerializeField] float Timer;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +14,7 @@ public class DestroyTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Timer -= Time.deltaTime;
+        if (Timer <= 0) Destroy(gameObject);
     }
 }
